@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Generator Profesional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 py-10">
+  <h1 class="text-4xl font-bold text-center mb-8">QR Code Generator Profesional</h1>
+
+  <form action="/generate" method="post" class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block font-semibold mb-1">Tip QR</label>
+        <select name="qr_type" class="w-full border px-3 py-2 rounded">
+          <option value="text">Text</option>
+          <option value="link">Link</option>
+          <option value="phone">Telefon</option>
+          <option value="email">Email</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Titlu PDF</label>
+        <input type="text" name="title" class="w-full border px-3 py-2 rounded" placeholder="ex: Manual RO, HU, BG">
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">Produs</label>
+        <input type="text" name="product" class="w-full border px-3 py-2 rounded" placeholder="ex: Smartwatch">
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Companie</label>
+        <input type="text" name="company" class="w-full border px-3 py-2 rounded" placeholder="ex: Firma Ta SRL">
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">Adresă</label>
+        <input type="text" name="address" class="w-full border px-3 py-2 rounded" placeholder="Strada, nr, localitate, județ">
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Telefon</label>
+        <input type="text" name="phone" class="w-full border px-3 py-2 rounded" placeholder="ex: 0759 XXX XXX">
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">Email</label>
+        <input type="email" name="email" class="w-full border px-3 py-2 rounded" placeholder="ex: contact@email.com">
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Origine</label>
+        <input type="text" name="origin" class="w-full border px-3 py-2 rounded" placeholder="ex: Made in China">
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="block font-semibold mb-1">Conținut QR</label>
+        <textarea name="data" rows="4" class="w-full border px-3 py-2 rounded resize-none" placeholder="Text, link, telefon etc."></textarea>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">Generează PDF + PNG</button>
+    </div>
+  </form>
+
+  {% if qr_path %}
+  <div class="mt-10 text-center">
+    <h2 class="text-xl font-semibold mb-4">Codul tău QR:</h2>
+    <img src="{{ qr_path }}" alt="QR Code" class="mx-auto w-56 shadow-md">
+    <div class="mt-4 space-x-4">
+      <a href="{{ qr_path }}" download class="text-blue-600 underline">Descarcă PNG</a>
+      {% if pdf_path %}
+      <a href="{{ pdf_path }}" download class="text-green-600 underline">Descarcă PDF</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</body>
+</html>
